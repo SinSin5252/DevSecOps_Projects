@@ -1,1 +1,1 @@
-# DecSecOps_Projects
+# DevSecOps_Projects
