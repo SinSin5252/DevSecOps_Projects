@@ -3,7 +3,7 @@
 A simple web server built using Nginx. This project documents the setup of a website on a Linux server.
 
 ## Table of Contents
-- [Establish connection to the target server](#establish connection to the target server)
+- [Establish connection to the target server](#establish-connection-to-the-target-server)
 
 ## Establish connection to the target server
 
