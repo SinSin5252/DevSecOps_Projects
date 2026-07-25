@@ -1,20 +1,52 @@
 # Webserver Project
 
-A simple web server built using Nginx. This project documents the setup of a website on a Linux server.
+A simple web server built using Nginx. This project documents the setup and deployment of a website on a Linux server.
+
+The project covers:
+
+- Connecting to a remote Linux server using SSH
+- Securing SSH access with SSH keys
+- Setting up Git access via SSH
+- Installing and configuring Nginx
+- Deploying a website to the web server
 
 ## Table of Contents
-- [Establish connection to the target server](#establish-connection-to-the-target-server)
+- [Establish a Connection to the Target Server](#establish-connection-to-the-target-server)
+- [Establish Git Access via SSH](#estabilish-git-access-via-ssh)
+- [Set Up Nginx](#set-up-nginx)
+- [Webside Deployment](#webside-deployment)
 
-## Establish connection to the target server
+## Establish a Connection to the Target Server
 
-After ensuring the connectivity over the login credentials, it is recomendet to connect with a ssh key. After ensuring that the ssh key works, deactivate the authenticaton over login credentials to protect the server from brutforce. to generate a ssh key following comands will be used in Linux shell:
+The first step is to establish a secure connection to the remote Linux server. SSH (Secure Shell) allows the client to remotely access and manage the server through the command line.
 
-generate a ssh key
+### 1. Generate an SSH Key
 
-1. Generation
 Client:
 
 ``
 $ ssh-keygen -t ed25519
 ``
-2. 
+
+The command generates a private key and a public key.
+
+The private key is stored locally and must never be shared. The public key can be safely copied to the server.
+
+The generated files usually look like this, if the path and keyname didn't changed:
+
+``
+~/.ssh/id_ed25519
+~/.ssh/id_ed25519.pub
+``
+
+### 2. Copy the Public Key to the Server
+
+
+
+## Establish Git Access via SSH
+
+
+## Set Up Nginx
+
+
+## Webside Deployment
