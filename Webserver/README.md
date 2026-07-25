@@ -4,10 +4,11 @@ A simple web server built using Nginx. This project documents the setup of a web
 
 ## Establisch connection to the target server
 
-After ensuring the connectivity over the login credentials, it is recomendet to connect over ssh and deactivate the authenticaton over login credentials.
+After ensuring the connectivity over the login credentials, it is recomendet to connect with a ssh key and deactivate the authenticaton over login credentials to protect the server from brutforce.
 
-client
 
+
+Client:
 ``
 $ ssh
 ``
