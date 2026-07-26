@@ -28,19 +28,42 @@ Client:
 $ ssh-keygen -t ed25519
 ``
 
+
 The command generates a private key and a public key.
 
-The private key is stored locally and must never be shared. The public key can be safely copied to the server.
+The private key is stored locally and shouldn't never be shared. The public key can be safely copied to the server.
 
-The generated files usually look like this, if the path and keyname didn't changed:
+The generated files usually look like this, if the path and keyname won't changed:
 
 ``
 ~/.ssh/id_ed25519
 ~/.ssh/id_ed25519.pub
 ``
 
+
 ### 2. Copy the Public Key to the Server
 
+The public key can be copied to the server using:
+
+´´
+ssh-copy-id -i ~/.ssh/id_ed25519.pub username@SERVER_IP
+´´
+### 3. Connect Using the SSH Key
+
+´´
+ssh -i ~/.ssh/id_ed25519 username@SERVER_IP
+´´
+
+### 4. Disable Password Authentication
+
+
+sudo nano /etc/ssh/sshd_config
+PasswordAuthentication no
+sudo systemctl restart ssh.service
+
+> [!CAUTION]
+> Vorsicht bei der Ausführung dieses Befehls.
+>
 
 
 ## Establish Git Access via SSH
