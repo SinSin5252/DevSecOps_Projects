@@ -62,7 +62,7 @@ PasswordAuthentication no
 sudo systemctl restart ssh.service
 
 > [!CAUTION]
-> Vorsicht bei der Ausführung dieses Befehls.
+> ⚠️ Make sure that SSH key authentication works before disabling password authentication. Otherwise, you may lose access to the server.
 >
 
 
