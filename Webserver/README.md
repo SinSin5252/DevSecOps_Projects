@@ -11,8 +11,9 @@ The project covers:
 - Deploying a website to the web server
 
 ## Table of Contents
-- [Establish a Connection to the Target Server](#establish-connection-to-the-target-server)
-- [Establish Git Access via SSH](#estabilish-git-access-via-ssh)
+
+- [Establish a Connection to the Target Server](#establish-a-connection-to-the-target-server)
+- [Establish Git Access via SSH](#establish-git-access-via-ssh)
 - [Set Up Nginx](#set-up-nginx)
 - [Webside Deployment](#webside-deployment)
 
@@ -56,17 +57,28 @@ ssh -i ~/.ssh/id_ed25519 username@SERVER_IP
 
 ### 4. Disable Password Authentication
 
-
-sudo nano /etc/ssh/sshd_config
-PasswordAuthentication no
-sudo systemctl restart ssh.service
-
 > [!CAUTION]
 > ⚠️ Make sure that SSH key authentication works before disabling password authentication. Otherwise, you may lose access to the server.
 >
 
+Open the config fiel `sshd_config` and edit the value `PasswordAuthentication` to `no`. Restart `ssh.service` after editing the config file.
+
+Server:
+``
+sudo nano /etc/ssh/sshd_config
+sudo systemctl restart ssh.service
+``
+
 
 ## Establish Git Access via SSH
+
+`
+Host github.com
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_ed25519
+    IdentitiesOnly yes
+`
 
 
 ## Set Up Nginx
