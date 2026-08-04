@@ -25,35 +25,38 @@ The first step is to establish a secure connection to the remote Linux server. S
 
 Client:
 
-``
+```bash
 $ ssh-keygen -t ed25519
-``
+```
 
 
 The command generates a private key and a public key.
 
 The private key is stored locally and shouldn't never be shared. The public key can be safely copied to the server.
 
-The generated files usually look like this, if the path and keyname won't changed:
+The generated files usually look like this, if the path and key name won't changed:
 
-``
+```bash 
 ~/.ssh/id_ed25519
 ~/.ssh/id_ed25519.pub
-``
+```
 
 
 ### 2. Copy the Public Key to the Server
 
 The public key can be copied to the server using:
 
-´´
+```bash
 ssh-copy-id -i ~/.ssh/id_ed25519.pub username@SERVER_IP
-´´
+```
+
 ### 3. Connect Using the SSH Key
 
-´´
+The connection can be establish with the following command:
+
+```bash
 ssh -i ~/.ssh/id_ed25519 username@SERVER_IP
-´´
+```
 
 ### 4. Disable Password Authentication
 
@@ -61,27 +64,52 @@ ssh -i ~/.ssh/id_ed25519 username@SERVER_IP
 > ⚠️ Make sure that SSH key authentication works before disabling password authentication. Otherwise, you may lose access to the server.
 >
 
-Open the config fiel `sshd_config` and edit the value `PasswordAuthentication` to `no`. Restart `ssh.service` after editing the config file.
+Open the config file `sshd_config` with sudo rights and edit the value `PasswordAuthentication` to `no`. Restart `ssh.service` after editing the config file.
 
 Server:
-``
+```bash
 sudo nano /etc/ssh/sshd_config
 sudo systemctl restart ssh.service
-``
+```
 
 
 ## Establish Git Access via SSH
 
-`
+### 1. Generate an SSH Key for Git
+
+The SSH key can be generated the same as in the previous [step](#generate-an-ssh-key) and don't forget to use an other name for the key.
+
+### 2. Link the SSH Key with Git
+
+The content of the public key has to be copied to GitHub. 
+```
+cat ~/.ssh/<KEY_NAME>.pub
+```
+
+Go to the right top corner and click to your `Profil` and navigate to `Settings` in GitHub. Create a SSH Key under the menu `SSH and GPG Key`
+enter the title and the copied key content.
+
+### 3. Configure the SSH Key to solve Permission issues
+
+If a permission denied error message appears after setup, the most issue is that the Client cant find the key. To solve this issue a `config` file has to be created.
+
+```
+touch ~/.ssh/config
+```
+
+The content of the `config` file is set as following:
+
+```
 Host github.com
     HostName github.com
     User git
-    IdentityFile ~/.ssh/id_ed25519
+    IdentityFile ~/.ssh/<KEY_NAME>
     IdentitiesOnly yes
-`
+```
 
 
 ## Set Up Nginx
 
 
 ## Webside Deployment
+
