@@ -29,22 +29,22 @@ Client:
 $ ssh-keygen -t ed25519
 ```
 
-
 The command generates a private key and a public key.
-
 The private key is stored locally and shouldn't never be shared. The public key can be safely copied to the server.
-
 The generated files usually look like this, if the path and key name won't changed:
+
 
 ```bash 
 ~/.ssh/id_ed25519
 ~/.ssh/id_ed25519.pub
 ```
 
+During key generation, you will be prompted to enter a passphrase for the key. This serves as an additional layer of security. While entering a passphrase is optional, it is strongly recommended to protect your private key. If you choose to use one, store it securely in a password manager.
+
 
 ### 2. Copy the Public Key to the Server
 
-The public key can be copied to the server using:
+The public key can be copied to the server using the following command:
 
 ```bash
 ssh-copy-id -i ~/.ssh/id_ed25519.pub username@SERVER_IP
@@ -64,11 +64,18 @@ ssh -i ~/.ssh/id_ed25519 username@SERVER_IP
 > ⚠️ Make sure that SSH key authentication works before disabling password authentication. Otherwise, you may lose access to the server.
 >
 
-Open the config file `sshd_config` with sudo rights and edit the value `PasswordAuthentication` to `no`. Restart `ssh.service` after editing the config file.
+Open the config file `sshd_config` with sudo rights and edit the value `PasswordAuthentication` to `no` (The # has to be removed). 
 
 Server:
 ```bash
 sudo nano /etc/ssh/sshd_config
+
+```
+
+Restart `ssh.service` after editing and saving the config file.
+
+Server:
+```bash
 sudo systemctl restart ssh.service
 ```
 
@@ -77,7 +84,7 @@ sudo systemctl restart ssh.service
 
 ### 1. Generate an SSH Key for Git
 
-The SSH key can be generated the same as in the previous [step](#generate-an-ssh-key) and don't forget to use an other name for the key.
+The SSH key can be generated the same as in the previous [step](#1.-generate-an-ssh-key) and don't forget to use an other name for the key.
 
 ### 2. Link the SSH Key with Git
 
@@ -91,7 +98,7 @@ enter the title and the copied key content.
 
 ### 3. Configure the SSH Key to solve Permission issues
 
-If a permission denied error message appears after setup, the most issue is that the Client cant find the key. To solve this issue a `config` file has to be created.
+If a permission denied error message appears after setup, the most issue is that the Server cant find the key. To solve this issue a `config` file has to be created.
 
 ```
 touch ~/.ssh/config
